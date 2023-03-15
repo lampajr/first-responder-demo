@@ -88,10 +88,7 @@ public class RoutePlanner {
                 .overview(DirectionsCriteria.OVERVIEW_FULL)
                 .profile(profile)
                 .steps(true);
-        mapBoxBaseUrl.ifPresent(baseUrl -> {
-            logger.info("Using MapBox API mock service");
-            builder.baseUrl(baseUrl);
-        });
+        mapBoxBaseUrl.ifPresent(builder::baseUrl);
         MapboxDirections request = builder.build();
 
         Response<DirectionsResponse> response = request.executeCall();
