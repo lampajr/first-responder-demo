@@ -13,6 +13,7 @@ public class GeneratorResource {
 
     @Inject
     Disaster disaster;
+
     @GET
     @Path("incidents/{number}")
     @Produces(MediaType.APPLICATION_JSON)

@@ -82,7 +82,8 @@ public class RoutePlanner {
         MapboxDirections.Builder builder = MapboxDirections.builder()
                 .accessToken(MAPBOX_ACCESS_TOKEN)
                 .origin(Point.fromLngLat(origin.getLongitude().doubleValue(), origin.getLatitude().doubleValue()))
-                .destination(Point.fromLngLat(destination.getLongitude().doubleValue(), destination.getLatitude().doubleValue()))
+                .destination(
+                        Point.fromLngLat(destination.getLongitude().doubleValue(), destination.getLatitude().doubleValue()))
                 .addWaypoint(Point.fromLngLat(waypoint.getLongitude().doubleValue(), waypoint.getLatitude().doubleValue()))
                 .overview(DirectionsCriteria.OVERVIEW_FULL)
                 .profile(profile)
