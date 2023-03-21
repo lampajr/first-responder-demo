@@ -17,15 +17,14 @@ public class GeneratorResource {
     @Path("incidents/{number}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Incident> incidents(@PathParam("number") int numOfIncidents) {
-       return disaster.generateIncidents(numOfIncidents, true);
+       return disaster.generateIncidents(numOfIncidents);
     }
 
     @GET
     @Path("responders/{number}/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Responder> responders(@PathParam("number") int numOfResponders) {
-        Disaster d = new Disaster();
-        return d.generateResponders(numOfResponders);
+        return disaster.generateResponders(numOfResponders);
     }
 
 }

@@ -45,8 +45,9 @@ public class Disaster {
                 .medicalNeeded(new Random().nextBoolean())
                 .build();
 
-        if(send)
-        backendService.createIncident(incident);
+        if(send) {
+            backendService.createIncident(incident);
+        }
 
         return incident;
 
@@ -61,7 +62,7 @@ public class Disaster {
 
     public Responder generateResponder() {
         Point2D.Double point = points.getInternalPoint();
-        return new Responder.Builder()
+        Responder responder = new Responder.Builder()
                 .name(fullNames.getNextFullName())
                 .phoneNumber(GeneratePhoneNumbers.getNextPhoneNumber())
                 .boatCapacity(biasedRandom(1, 12, 0.5))
@@ -72,10 +73,14 @@ public class Disaster {
                 .person(false)
                 .available(true)
                 .build();
+        if (send) {
+            backendService.createResponder(responder);
+        }
+        return responder;
     }
 
 
-    public List<Incident> generateIncidents(int number, boolean send){
+    public List<Incident> generateIncidents(int number){
         List<Incident> incidents = new ArrayList<Incident>(number);
         for(int i=0; i<number; i++)
             incidents.add(generateSingleIncident());
