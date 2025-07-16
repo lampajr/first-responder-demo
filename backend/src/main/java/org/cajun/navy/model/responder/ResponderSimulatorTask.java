@@ -3,9 +3,9 @@ package org.cajun.navy.model.responder;
 import org.cajun.navy.model.mission.MissionEntity;
 import org.cajun.navy.service.MissionService;
 
-import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import javax.inject.Inject;
+import jakarta.ejb.Schedule;
+import jakarta.ejb.Singleton;
+import jakarta.inject.Inject;
 import java.util.List;
 import java.util.logging.Logger;
 

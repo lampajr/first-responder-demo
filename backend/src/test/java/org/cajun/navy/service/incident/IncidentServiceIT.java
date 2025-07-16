@@ -2,7 +2,7 @@ package org.cajun.navy.service.incident;
 
 import java.math.BigDecimal;
 import java.util.List;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.cajun.navy.exception.NoResponderAvailableException;
 import org.cajun.navy.model.incident.IncidentStatus;

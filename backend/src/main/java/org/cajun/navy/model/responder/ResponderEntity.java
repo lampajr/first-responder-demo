@@ -1,7 +1,7 @@
 package org.cajun.navy.model.responder;
 
-import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.*;
+import jakarta.json.bind.annotation.JsonbTransient;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 

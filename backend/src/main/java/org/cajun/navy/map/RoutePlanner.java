@@ -10,8 +10,8 @@ import org.cajun.navy.model.mission.MissionStepEntity;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import retrofit2.Response;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;

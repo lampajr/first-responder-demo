@@ -1,11 +1,11 @@
 package org.cajun.navy.model.responder;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.NonUniqueResultException;
+import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import java.util.List;
 
 public class ResponderDaoImpl implements ResponderDao {

@@ -5,12 +5,12 @@ import org.cajun.navy.service.IncidentService;
 import org.cajun.navy.service.MissionService;
 import org.cajun.navy.service.model.Incident;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import java.util.logging.Logger;
 
 @Path("/incidents")

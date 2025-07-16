@@ -1,9 +1,9 @@
 package org.cajun.navy.map;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.json.JsonObject;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.json.JsonObject;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 import java.util.*;
 
 /**
