@@ -18,7 +18,7 @@ package org.cajun.navy.service.incident;
 
 import java.math.BigDecimal;
 import java.util.UUID;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.cajun.navy.model.incident.IncidentEntity;
 import org.cajun.navy.model.incident.IncidentDao;

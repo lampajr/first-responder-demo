@@ -1,6 +1,6 @@
 package org.cajun.navy.model.mission;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity

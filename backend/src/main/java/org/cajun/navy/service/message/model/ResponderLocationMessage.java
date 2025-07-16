@@ -2,7 +2,7 @@ package org.cajun.navy.service.message.model;
 
 import org.cajun.navy.model.mission.MissionStatus;
 
-import javax.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbProperty;
 import java.math.BigDecimal;
 
 public class ResponderLocationMessage {
