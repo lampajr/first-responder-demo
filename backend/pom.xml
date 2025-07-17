@@ -533,7 +533,7 @@
                                     <offline>true</offline>
                                     <commands>
                                         <command>embed-server --admin-only=true</command>
-                                        <command>module add --name=org.postgres --resources=${project.build.directory}/dependency/postgresql-${version.postgresql}.jar --dependencies=javax.api,javax.transaction.api</command>
+                                        <command>module add --name=org.postgres --resources=${project.build.directory}/dependency/postgresql-${version.postgresql}.jar --dependencies=jakarta.transaction.api</command>
                                         <command>/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)</command>
                                         <command>data-source add --jndi-name=java:/FRDemoDS --name=FRDemoDS --connection-url=${jdbc.url} --driver-name=postgres --user-name=frdemo --password=frdemo</command>
                                     </commands>
