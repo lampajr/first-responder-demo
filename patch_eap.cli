@@ -1,0 +1,9 @@
+batch
+/subsystem=undertow/server=default-server/host=default-host:write-attribute(name=default-web-module, value=frdemo-backend.war)
+/system-property=KAFKA_SERVER:add(value=localhost:9092)
+/system-property=MAPBOX_TOKEN:add(value=pk.eyJ1IjoiandoaXRpbmc5OSIsImEiOiJjbGhnYWw2ZWYyM3c0M2ZudWd3dnplczBmIn0.t8CEmFDij_cZecNC0NWZMA)
+/system-property=MAPBOX_BASE_URL:add(value=http://localhost:9123)
+/subsystem=microprofile-opentracing-smallrye:remove()
+/subsystem=deployment-scanner/scanner=default:write-attribute(name=scan-interval,value=0)
+run-batch
+reload
