@@ -18,14 +18,14 @@ To download and install WildFly, copy and paste the following into your shell:
 ```bash
 cd /tmp
 wget https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar
-wget https://github.com/wildfly/wildfly/releases/download/26.1.1.Final/wildfly-26.1.1.Final.zip
-unzip -q wildfly-26.1.1.Final.zip
-/tmp/wildfly-26.1.1.Final/bin/standalone.sh
+wget https://github.com/wildfly/wildfly/releases/download/36.0.1.Final/wildfly-36.0.1.Final.zip
+unzip -q wildfly-36.0.1.Final.zip
+/tmp/wildfly-36.0.1.Final/bin/standalone.sh
 ```
 
 Configure the EAP standalone
 ```bash
-wildfly-26.1.1.Final/bin/jboss-cli.sh -c << EOF
+wildfly-36.0.1.Final/bin/jboss-cli.sh -c << EOF
 batch
 /extension=org.wildfly.extension.microprofile.reactive-messaging-smallrye:add
 /extension=org.wildfly.extension.microprofile.reactive-streams-operators-smallrye:add
@@ -38,7 +38,6 @@ data-source add --jndi-name=java:/FRDemoDS --name=FRDemoDS --connection-url=jdbc
 /system-property=KAFKA_SERVER:add(value=localhost:9092)
 /system-property=MAPBOX_TOKEN:add(value=pk.eyJ1IjoiandoaXRpbmc5OSIsImEiOiJjbGhnYWw2ZWYyM3c0M2ZudWd3dnplczBmIn0.t8CEmFDij_cZecNC0NWZMA)
 /system-property=MAPBOX_BASE_URL:add(value=http://localhost:9123)
-/subsystem=microprofile-opentracing-smallrye:remove()
 /subsystem=deployment-scanner/scanner=default:write-attribute(name=scan-interval,value=0)
 run-batch
 reload
