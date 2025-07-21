@@ -19,8 +19,8 @@
         <maven.repository.url>${maven.repository.protocol}://repository.jboss.org/nexus/content/groups/public/</maven.repository.url>
         <maven.redhat.repository.url>${maven.repository.protocol}://maven.repository.redhat.com/ga/</maven.redhat.repository.url>
         <maven.repo.url>${maven.repository.protocol}://repo1.maven.org/maven2/</maven.repo.url>
-        <version.server.bom>7.4.0.GA</version.server.bom>
-        <version.server.xp>4.0.0.GA</version.server.xp>
+        <version.server.bom>7.4.23.GA</version.server.bom>
+        <version.server.xp>4.0.2.GA</version.server.xp>
         <mapbox.version>4.5.0</mapbox.version>
         <version.checkstyle>8.5</version.checkstyle>
         <version.testcontainers>1.17.3</version.testcontainers>
