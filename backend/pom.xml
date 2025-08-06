@@ -14,8 +14,8 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.repository.protocol>https</maven.repository.protocol>
-        <version.wildfly>26.1.1.Final</version.wildfly>
-        <version.wildfly.maven.plugin>3.0.2.Final</version.wildfly.maven.plugin>
+        <version.wildfly>34.0.1.Final</version.wildfly>
+        <version.wildfly.maven.plugin>5.0.1.Final</version.wildfly.maven.plugin>
         <maven.repository.url>${maven.repository.protocol}://repository.jboss.org/nexus/content/groups/public/</maven.repository.url>
         <maven.redhat.repository.url>${maven.repository.protocol}://maven.repository.redhat.com/ga/</maven.redhat.repository.url>
         <maven.repo.url>${maven.repository.protocol}://repo1.maven.org/maven2/</maven.repo.url>
@@ -33,7 +33,6 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- importing the jakartaee8-with-tools BOM adds specs and other useful artifacts as managed dependencies -->
             <dependency>
                 <groupId>org.jboss.bom</groupId>
                 <artifactId>jboss-eap-ee-with-tools</artifactId>
