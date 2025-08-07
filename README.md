@@ -18,15 +18,15 @@ To download and install WildFly, copy and paste the following into your shell:
 ```bash
 cd /tmp
 wget https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar
-wget https://github.com/wildfly/wildfly/releases/download/34.0.1.Final/wildfly-34.0.1.Final.zip
-unzip -q wildfly-34.0.1.Final.zip
-/tmp/wildfly-34.0.1.Final/bin/standalone.sh
+wget https://github.com/wildfly/wildfly/releases/download/37.0.0.Final/wildfly-37.0.0.Final.zip
+unzip -q wildfly-37.0.0.Final.zip
+/tmp/wildfly-37.0.0.Final/bin/standalone.sh
 ```
 
 Configure the EAP standalone
 ```bash
 cd /tmp
-wildfly-34.0.1.Final/bin/jboss-cli.sh -c << EOF
+wildfly-37.0.0.Final/bin/jboss-cli.sh -c << EOF
 batch
 /extension=org.wildfly.extension.microprofile.reactive-messaging-smallrye:add
 /extension=org.wildfly.extension.microprofile.reactive-streams-operators-smallrye:add

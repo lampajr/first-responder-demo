@@ -14,7 +14,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.repository.protocol>https</maven.repository.protocol>
-        <version.wildfly>34.0.1.Final</version.wildfly>
+        <version.wildfly>37.0.0.Final</version.wildfly>
         <version.wildfly.maven.plugin>5.0.1.Final</version.wildfly.maven.plugin>
         <maven.repository.url>${maven.repository.protocol}://repository.jboss.org/nexus/content/groups/public/</maven.repository.url>
         <maven.redhat.repository.url>${maven.repository.protocol}://maven.repository.redhat.com/ga/</maven.redhat.repository.url>
