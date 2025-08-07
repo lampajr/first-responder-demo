@@ -48,8 +48,8 @@ public class Disaster {
         if(send) {
             backendService.createIncident(incident);
         }
-        return incident;
 
+        return incident;
     }
 
     public List<Responder> generateResponders(int number) {
