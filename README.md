@@ -25,6 +25,7 @@ unzip -q wildfly-34.0.1.Final.zip
 
 Configure the EAP standalone
 ```bash
+cd /tmp
 wildfly-34.0.1.Final/bin/jboss-cli.sh -c << EOF
 batch
 /extension=org.wildfly.extension.microprofile.reactive-messaging-smallrye:add
@@ -49,9 +50,10 @@ To download and install Kafka, perform the steps below. For more information on 
 [Apache Kafka Quickstart](https://kafka.apache.org/quickstart).
 
 ```bash
-wget https://dlcdn.apache.org/kafka/3.2.1/kafka_2.13-3.2.1.tgz
-tar xf kafka_2.13-3.2.1.tgz
-cd kafka_2.13-3.2.1.tgz
+cd /tmp
+wget https://dlcdn.apache.org/kafka/3.9.1/kafka_2.13-3.9.1.tgz
+tar xf kafka_2.13-3.9.1.tgz
+cd kafka_2.13-3.9.1
 # (In separate terminal windows/tabs)
 bin/zookeeper-server-start.sh config/zookeeper.properties
 bin/kafka-server-start.sh config/server.properties
@@ -62,10 +64,12 @@ bin/kafka-console-consumer.sh --topic IncidentReportedEvent --from-beginning --b
 ### Starting MapBox API mock
 
 ```bash
+cd /tmp
+
 git clone https://github.com/hpehl/frdemo-mapbox.git
 
 # build
-cd ~/frdemo-mapbox && mvn -B -ntp clean package -DskipTests -Dquarkus.package.type=uber-jar
+cd frdemo-mapbox && mvn -B -ntp clean package -DskipTests -Dquarkus.package.type=uber-jar
 
 # run
 java -jar target/frdemo-mapbox-1.0.0-SNAPSHOT-runner.jar
