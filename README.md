@@ -12,39 +12,6 @@ to run them locally, etc -- will be added soon.
 podman run -d --env POSTGRES_PASSWORD=frdemo --env POSTGRES_USER=frdemo --env POSTGRES_DB=frdemo --name frdemo-db -p 5432:5432 docker.io/library/postgres:14.1-alpine
 ```
 
-### Setting up WildFly
-To download and install WildFly, copy and paste the following into your shell:
-
-```bash
-cd /tmp
-wget https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar
-wget https://github.com/wildfly/wildfly/releases/download/37.0.0.Final/wildfly-37.0.0.Final.zip
-unzip -q wildfly-37.0.0.Final.zip
-/tmp/wildfly-37.0.0.Final/bin/standalone.sh
-```
-
-Configure the EAP standalone
-```bash
-cd /tmp
-wildfly-37.0.0.Final/bin/jboss-cli.sh -c << EOF
-batch
-/extension=org.wildfly.extension.microprofile.reactive-messaging-smallrye:add
-/extension=org.wildfly.extension.microprofile.reactive-streams-operators-smallrye:add
-/subsystem=microprofile-reactive-streams-operators-smallrye:add
-/subsystem=microprofile-reactive-messaging-smallrye:add
-module add --name=org.postgres --resources=postgresql-42.2.5.jar --dependencies=javax.api,javax.transaction.api
-/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)
-data-source add --jndi-name=java:/FRDemoDS --name=FRDemoDS --connection-url=jdbc:postgresql://localhost/frdemo --driver-name=postgres --user-name=frdemo --password=frdemo
-/subsystem=undertow/server=default-server/host=default-host:write-attribute(name=default-web-module, value=frdemo-backend.war)
-/system-property=KAFKA_SERVER:add(value=localhost:9092)
-/system-property=MAPBOX_TOKEN:add(value=pk.eyJ1IjoiandoaXRpbmc5OSIsImEiOiJjbGhnYWw2ZWYyM3c0M2ZudWd3dnplczBmIn0.t8CEmFDij_cZecNC0NWZMA)
-/system-property=MAPBOX_BASE_URL:add(value=http://localhost:9123)
-/subsystem=deployment-scanner/scanner=default:write-attribute(name=scan-interval,value=0)
-run-batch
-reload
-EOF
-```
-
 ### Starting Kafka
 To download and install Kafka, perform the steps below. For more information on Kafka, see the
 [Apache Kafka Quickstart](https://kafka.apache.org/quickstart).
@@ -75,10 +42,17 @@ cd frdemo-mapbox && mvn -B -ntp clean package -DskipTests -Dquarkus.package.type
 java -jar target/frdemo-mapbox-1.0.0-SNAPSHOT-runner.jar
 ```
 
-### Deploying the application
+### Package the application's backend
 
 ```bash
-mvn clean install wildfly:deploy -pl backend
+mvn clean package -pl backend
+```
+
+### Run the application's backend
+
+```bash
+source ./backend/local.env
+./backend/target/server/bin/standalone.sh
 ```
 
 ### [optional] Starting the load simulator
