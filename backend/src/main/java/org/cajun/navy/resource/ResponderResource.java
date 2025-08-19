@@ -1,5 +1,6 @@
 package org.cajun.navy.resource;
 
+import io.smallrye.common.annotation.Blocking;
 import org.cajun.navy.service.ResponderService;
 import org.cajun.navy.service.model.Responder;
 
@@ -30,6 +31,7 @@ public class ResponderResource {
         @GET
         @Path("{id}")
         @Produces(MediaType.APPLICATION_JSON)
+        @Blocking
         public Response responder(@PathParam("id") long id) {
                 Responder responder = service.findById(id);
                 if (responder == null) {
@@ -55,6 +57,7 @@ public class ResponderResource {
         @GET
         @Path("available")
         @Produces(MediaType.APPLICATION_JSON)
+        @Blocking
         public Response availableResponders(@QueryParam("limit") Optional<Integer> limit, @QueryParam("offset") Optional<Integer> offset) {
                 List<Responder> responders;
                 if (limit.isPresent()) {
