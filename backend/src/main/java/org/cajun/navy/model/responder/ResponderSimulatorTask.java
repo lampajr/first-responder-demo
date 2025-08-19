@@ -11,6 +11,7 @@ import jakarta.inject.Inject;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Startup
 @Singleton
 public class ResponderSimulatorTask {
 
