@@ -11,9 +11,6 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import java.util.logging.Logger;
 
 @Path("/incidents")
@@ -28,8 +25,8 @@ public class IncidentResource {
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public CompletionStage<Response> incidents() {
-        return CompletableFuture.supplyAsync(() -> Response.status(Response.Status.ACCEPTED).entity(service.findAll()).build());
+    public Response incidents() {
+        return Response.status(Response.Status.ACCEPTED).entity(service.findAll()).build();
     }
 
     @POST
@@ -55,13 +52,13 @@ public class IncidentResource {
     @GET
     @Path("/incident/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public CompletionStage<Response> incidentById(@PathParam("id") String incidentId) {
+    public Response incidentById(@PathParam("id") String incidentId) {
         Incident item = service.findByIncidentId(incidentId);
         if(item == null){
-            return CompletableFuture.supplyAsync(() -> Response.status(Response.Status.NO_CONTENT).build());
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
         else{
-            return CompletableFuture.supplyAsync(() -> Response.ok(item).build());
+            return Response.ok(item).build();
         }
     }
 
