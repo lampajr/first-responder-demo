@@ -12,6 +12,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 @Path("/responder-service/")
 @RequestScoped
@@ -30,12 +32,12 @@ public class ResponderResource {
         @GET
         @Path("{id}")
         @Produces(MediaType.APPLICATION_JSON)
-        public Response responder(@PathParam("id") long id) {
+        public CompletionStage<Response> responder(@PathParam("id") long id) {
                 Responder responder = service.findById(id);
                 if (responder == null) {
-                        return Response.status(Response.Status.NOT_FOUND).build();
+                        return CompletableFuture.supplyAsync(() -> Response.status(Response.Status.NOT_FOUND).build());
                 } else {
-                        return Response.ok(responder).build();
+                        return CompletableFuture.supplyAsync(() -> Response.ok(responder).build());
                 }
         }
 
@@ -55,7 +57,7 @@ public class ResponderResource {
         @GET
         @Path("available")
         @Produces(MediaType.APPLICATION_JSON)
-        public Response availableResponders(@QueryParam("limit") Optional<Integer> limit, @QueryParam("offset") Optional<Integer> offset) {
+        public CompletionStage<Response> availableResponders(@QueryParam("limit") Optional<Integer> limit, @QueryParam("offset") Optional<Integer> offset) {
                 List<Responder> responders;
                 if (limit.isPresent()) {
                         if (offset.isPresent()) {
@@ -66,7 +68,7 @@ public class ResponderResource {
                 } else {
                         responders = service.availableResponders();
                 }
-                return Response.ok(responders).build();
+                return CompletableFuture.supplyAsync(() -> Response.ok(responders).build());
         }
 
         @GET

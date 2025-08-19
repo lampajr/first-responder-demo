@@ -1,14 +1,20 @@
 package org.cajun.navy.resource;
 
-import org.cajun.navy.model.mission.MissionEntity;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.cajun.navy.service.MissionService;
 import org.cajun.navy.service.model.Mission;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 @Path("/api/missions")
 @RequestScoped
@@ -20,8 +26,8 @@ public class MissionResource {
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response allMissions() {
-        return Response.status(Response.Status.ACCEPTED).entity(service.findAll()).build();
+    public CompletionStage<Response> allMissions() {
+        return CompletableFuture.supplyAsync(() -> Response.status(Response.Status.ACCEPTED).entity(service.findAll()).build());
     }
 
     @POST
@@ -37,10 +43,9 @@ public class MissionResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response missionByResponderId(@PathParam("id") String responderId) {
         Mission item = service.findByMissionId(responderId);
-        if(item == null){
+        if (item == null) {
             return Response.status(Response.Status.NO_CONTENT).build();
-        }
-        else{
+        } else {
             return Response.ok(item).build();
         }
     }
