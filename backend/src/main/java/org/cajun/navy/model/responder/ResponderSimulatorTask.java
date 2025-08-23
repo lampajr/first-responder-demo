@@ -1,20 +1,17 @@
 package org.cajun.navy.model.responder;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
+import jakarta.ejb.*;
 import org.cajun.navy.model.mission.MissionEntity;
 import org.cajun.navy.service.MissionService;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.ejb.ScheduleExpression;
-import javax.ejb.Singleton;
-import javax.ejb.Timeout;
-import javax.ejb.TimerConfig;
-import javax.ejb.TimerService;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Startup
 @Singleton
 public class ResponderSimulatorTask {
 

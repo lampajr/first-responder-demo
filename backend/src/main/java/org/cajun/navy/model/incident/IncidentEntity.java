@@ -1,6 +1,6 @@
 package org.cajun.navy.model.incident;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 

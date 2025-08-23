@@ -10,8 +10,8 @@ import org.cajun.navy.model.mission.MissionStepEntity;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import retrofit2.Response;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -82,7 +82,8 @@ public class RoutePlanner {
         MapboxDirections.Builder builder = MapboxDirections.builder()
                 .accessToken(MAPBOX_ACCESS_TOKEN)
                 .origin(Point.fromLngLat(origin.getLongitude().doubleValue(), origin.getLatitude().doubleValue()))
-                .destination(Point.fromLngLat(destination.getLongitude().doubleValue(), destination.getLatitude().doubleValue()))
+                .destination(
+                        Point.fromLngLat(destination.getLongitude().doubleValue(), destination.getLatitude().doubleValue()))
                 .addWaypoint(Point.fromLngLat(waypoint.getLongitude().doubleValue(), waypoint.getLatitude().doubleValue()))
                 .overview(DirectionsCriteria.OVERVIEW_FULL)
                 .profile(profile)

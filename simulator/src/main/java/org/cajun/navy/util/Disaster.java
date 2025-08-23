@@ -50,7 +50,6 @@ public class Disaster {
         }
 
         return incident;
-
     }
 
     public List<Responder> generateResponders(int number) {

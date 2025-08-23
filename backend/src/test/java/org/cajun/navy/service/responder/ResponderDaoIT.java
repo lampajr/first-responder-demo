@@ -1,7 +1,7 @@
 package org.cajun.navy.service.responder;
 
 import java.math.BigDecimal;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.cajun.navy.model.responder.ResponderEntity;
 import org.cajun.navy.model.responder.ResponderDao;

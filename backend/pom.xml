@@ -14,29 +14,28 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.repository.protocol>https</maven.repository.protocol>
-        <version.wildfly>26.1.1.Final</version.wildfly>
-        <version.wildfly.maven.plugin>3.0.2.Final</version.wildfly.maven.plugin>
+        <version.wildfly>37.0.0.Final</version.wildfly>
+        <version.failsafe.plugin>3.5.3</version.failsafe.plugin>
+        <version.wildfly.maven.plugin>5.1.3.Final</version.wildfly.maven.plugin>
         <maven.repository.url>${maven.repository.protocol}://repository.jboss.org/nexus/content/groups/public/</maven.repository.url>
         <maven.redhat.repository.url>${maven.repository.protocol}://maven.repository.redhat.com/ga/</maven.redhat.repository.url>
         <maven.repo.url>${maven.repository.protocol}://repo1.maven.org/maven2/</maven.repo.url>
-        <version.server.bom>7.4.0.GA</version.server.bom>
-        <version.server.xp>4.0.0.GA</version.server.xp>
+        <version.server.bom>8.0.8.GA-redhat-00006</version.server.bom>
+        <version.server.xp>5.0.1.GA-redhat-00001</version.server.xp>
         <mapbox.version>4.5.0</mapbox.version>
         <version.checkstyle>8.5</version.checkstyle>
         <version.testcontainers>1.17.3</version.testcontainers>
         <frdemo.dbname>frdemo</frdemo.dbname>
         <frdemo.dbuser>${frdemo.dbname}</frdemo.dbuser>
         <frdemo.dbpass>${frdemo.dbname}</frdemo.dbpass>
-        <version.postgresql>42.5.0</version.postgresql>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- importing the jakartaee8-with-tools BOM adds specs and other useful artifacts as managed dependencies -->
             <dependency>
                 <groupId>org.jboss.bom</groupId>
-                <artifactId>jboss-eap-jakartaee8-with-tools</artifactId>
+                <artifactId>jboss-eap-ee-with-tools</artifactId>
                 <version>${version.server.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -133,21 +132,21 @@
         <!-- Import the Common Annotations API (JSR-250), we use provided scope
             as the API is included in JBoss EAP -->
         <dependency>
-            <groupId>org.jboss.spec.javax.annotation</groupId>
-            <artifactId>jboss-annotations-api_1.3_spec</artifactId>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss EAP -->
         <dependency>
-            <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.spec.javax.xml.bind</groupId>
-            <artifactId>jboss-jaxb-api_2.3_spec</artifactId>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -160,13 +159,12 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>2.0.2.redhat-00001</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.spec.javax.ejb</groupId>
-            <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -187,7 +185,7 @@
         <!-- Import the resteasy-jaxrs API, we use provided scope as the API is included in JBoss EAP XP -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
+            <artifactId>resteasy-core-spi</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -233,13 +231,6 @@
         <dependency>
             <groupId>org.eclipse.microprofile.config</groupId>
             <artifactId>microprofile-config-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${version.postgresql}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -379,38 +370,6 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.postgresql</groupId>
-                                    <artifactId>postgresql</artifactId>
-                                    <version>${version.postgresql}</version>
-                                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                            <!-- other configurations here -->
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-deps</id>
-                        <phase>none</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
                 <configuration>
@@ -420,6 +379,43 @@
         </plugins>
     </build>
     <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                                <configuration>
+                                    <discover-provisioning-info>
+                                        <version>${version.wildfly}</version>
+                                        <verbose>true</verbose>
+                                        <add-ons>
+                                            <add-on>postgresql</add-on>
+                                        </add-ons>
+                                    </discover-provisioning-info>
+                                    <packaging-scripts>
+                                        <packaging-script>
+                                            <scripts>
+                                                <script>${project.build.scriptSourceDirectory}/setup.cli</script>
+                                            </scripts>
+                                        </packaging-script>
+                                    </packaging-scripts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <!-- An optional Arquillian testing profile that executes tests in your JBoss EAP instance.
                  This profile will start a new JBoss EAP instance, and execute the test, shutting it down when done.
@@ -492,58 +488,6 @@
                                 <version>3.0.0</version>
                             </dependency>
                         </dependencies>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>provision-server</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>provision</goal>
-                                </goals>
-                                <configuration>
-                                    <recordProvisioningState>true</recordProvisioningState>
-                                    <feature-packs>
-                                        <feature-pack>
-                                            <location>org.wildfly:wildfly-cloud-legacy-galleon-pack:${version.wildfly}</location>
-                                        </feature-pack>
-                                        <feature-pack>
-                                            <location>org.wildfly:wildfly-datasources-galleon-pack:2.2.3.Final</location>
-                                        </feature-pack>
-                                    </feature-packs>
-                                    <layers>
-                                        <layer>core-server</layer>
-                                        <layer>jaxrs-server</layer>
-                                        <layer>microprofile-reactive-messaging</layer>
-                                        <layer>microprofile-reactive-messaging-kafka</layer>
-                                    </layers>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>create-datasource</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>execute-commands</goal>
-                                </goals>
-                                <configuration>
-                                    <batch>true</batch>
-                                    <fail-on-error>true</fail-on-error>
-                                    <offline>true</offline>
-                                    <commands>
-                                        <command>embed-server --admin-only=true</command>
-                                        <command>module add --name=org.postgres --resources=${project.build.directory}/dependency/postgresql-${version.postgresql}.jar --dependencies=javax.api,javax.transaction.api</command>
-                                        <command>/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)</command>
-                                        <command>data-source add --jndi-name=java:/FRDemoDS --name=FRDemoDS --connection-url=${jdbc.url} --driver-name=postgres --user-name=frdemo --password=frdemo</command>
-                                    </commands>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <jboss-home>${project.basedir}/target/wildfly-${version.wildfly}</jboss-home>
-                            <provisioning-dir>${project.basedir}/target/wildfly-${version.wildfly}</provisioning-dir>
-                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
