@@ -1,6 +1,5 @@
 package org.cajun.navy.resource;
 
-import io.smallrye.common.annotation.Blocking;
 import org.cajun.navy.exception.NoResponderAvailableException;
 import org.cajun.navy.service.IncidentService;
 import org.cajun.navy.service.MissionService;
@@ -26,7 +25,6 @@ public class IncidentResource {
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    @Blocking
     public Response incidents() {
         return Response.status(Response.Status.ACCEPTED).entity(service.findAll()).build();
     }
@@ -54,7 +52,6 @@ public class IncidentResource {
     @GET
     @Path("/incident/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Blocking
     public Response incidentById(@PathParam("id") String incidentId) {
         Incident item = service.findByIncidentId(incidentId);
         if(item == null){
