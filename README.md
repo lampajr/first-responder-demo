@@ -9,7 +9,7 @@ to run them locally, etc -- will be added soon.
 ### Starting the database
 
 ```bash
-podman run -d --env POSTGRES_PASSWORD=frdemo --env POSTGRES_USER=frdemo --env POSTGRES_DB=frdemo --name frdemo-db -p 5432:5432 docker.io/library/postgres:14.1-alpine
+podman run --replace -d --env POSTGRES_PASSWORD=frdemo --env POSTGRES_USER=frdemo --env POSTGRES_DB=frdemo --name frdemo-db -p 5432:5432 docker.io/library/postgres:16
 ```
 
 ### Setting up WildFly
@@ -85,7 +85,7 @@ mvn clean install wildfly:deploy -pl backend
 
 ```bash
 mvn -B -ntp package -DskipTests -Dquarkus.container-image.build=false -Dquarkus.container-image.push=false -pl simulator -Dquarkus.package.type=uber-jar
-java -jar -DBACKEND_URL=http://localhost:8080/frdemo-backend -DSIM_SEND=true simulator/target/simulator-1.0-SNAPSHOT-runner.jar
+java -jar -DBACKEND_URL=http://localhost:8080 -DSIM_SEND=true simulator/target/simulator-1.0-SNAPSHOT-runner.jar
 ```
 
 ## Arquillian tests
