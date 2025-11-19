@@ -30,7 +30,7 @@ public class ResponderSimulatorTask {
     @PostConstruct
     void init() {
         if (active) {
-            ScheduleExpression expression = new ScheduleExpression().second("*/5").minute("*").hour("*");
+            ScheduleExpression expression = new ScheduleExpression().second("*/2").minute("*").hour("*");
             TimerConfig timerConfig = new TimerConfig();
             timerConfig.setPersistent(true);
             timerService.createCalendarTimer(expression, timerConfig);

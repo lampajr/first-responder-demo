@@ -45,7 +45,17 @@ public class MissionResource {
         }
     }
 
-
+    @POST
+    @Path("responders/move")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response doMoveResponderLocation() {
+        try {
+            service.doMoveResponderLocation();
+            return Response.status(Response.Status.ACCEPTED).build();
+        } catch  (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
 }
 
 

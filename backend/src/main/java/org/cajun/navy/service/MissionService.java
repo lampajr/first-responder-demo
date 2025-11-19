@@ -263,5 +263,11 @@ public class MissionService {
                 .build();
     }
 
+    @Transactional
+    public void doMoveResponderLocation(){
+        List<MissionEntity> missions = getAllCreatedOrUpdated();
+        logger.info("Are there any missions for next move? " + missions.size());
+        missions.forEach(this::doResponderNextMove);
+    }
 
 }

@@ -1,0 +1,62 @@
+name: frdemo
+
+http:
+  host: !param SERVER
+  sharedConnections: !param SHARED_CONNECTIONS 500
+  useHttpCache: false
+
+ergonomics: # Disable stopping the scenario on 4xx or 5xx response
+  autoRangeCheck: false
+  repeatCookies: false
+
+
+# fetch available responders, if empty create new one otherwise do nothing
+  # create responder with some prob
+# create incident with some prob
+# move responders (scheduled task RESPONDER_SIMULATOR_TASK=true - not needed to be called explicitly)
+phases:
+- warmup:
+    increasingRate:
+      duration: !param WARMUP_DURATION 60s
+      maxDuration: !param WARMUP_DURATION 60s
+      maxSessions: !param WARMUP_MAX_SESSIONS 30
+      initialUsersPerSec: 1
+      targetUsersPerSec: !param WARMUP_USERS_PER_SEC 10
+      forks:
+        responder: &responder
+          weight: 0.8
+          scenario:
+            - createResponder:
+                # todo: generate random content
+                - httpRequest: 
+                    headers:
+                      content-type: application/json
+                    POST: /responder-service/responder
+                    body: |
+                      {
+                        "name": "John Doe",
+                        "phoneNumber": "(252) 555-9094",
+                        "medicalKit": true,
+                        "available": true,
+                        "boatCapacity": 2,
+                        "latitude": "34.20933",
+                        "longitude": "-77.94251"
+                      }
+        incidents: &incidents
+          weight: 0.2
+          scenario:
+            - createIncident:
+                # todo: generate random content
+                - httpRequest: 
+                    headers:
+                      content-type: application/json
+                    POST: /incidents
+                    body: |
+                      {
+                        "victimName": "John Doe",
+                        "lat": "35.20933",
+                        "lon": "-78.94251",
+                        "victimPhoneNumber": "(252) 444-9093",
+                        "numberOfPeople": 5,
+                        "medicalNeeded": true
+                      }
